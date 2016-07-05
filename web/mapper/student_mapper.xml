@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="DownloadInfo">
-    <resultMap id="DownloadInfoMap" type="DownloadInfo">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="file_id" property="fileId" jdbcType="BIGINT"/>
-        <result column="physical_file_id" property="physicalFileId" jdbcType="VARCHAR"/>
-        <result column="file_name" property="fileName" jdbcType="VARCHAR"/>
-        <result column="file_type" property="fileType" jdbcType="INTEGER"/>
-        <result column="file_size" property="fileSize" jdbcType="BIGINT"/>
-        <result column="security_key" property="securityKey" jdbcType="VARCHAR"/>
-        <result column="download_url" property="dldUrl" jdbcType="VARCHAR"/>
-        <result column="download_time" property="dldTime" jdbcType="TIMESTAMP"/>
+<mapper namespace="Student">
+    <resultMap id="StudentMap" type="Student">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="pwd" property="pwd" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="year" property="year" jdbcType="VARCHAR"/>
+        <result column="major" property="major" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, file_id, physical_file_id, file_name,file_type, file_size,
-        security_key,download_url,download_time
+        id,pwd,name,sex,year,major
     </sql>
+
+    <select id="selectById" resultMap="StudentMap" parameterType="java.util.Map" resultType="Student">
+        SELECT <include refid="Base_Column_List" />
+        FROM student WHERE id = ${id}
+    </select>
+
+    <insert id="insert" parameterType="Student">
+        INSERT INTO student (id,pwd,name,sex,year,major)
+        VALUES (#{id,jdbcType=VARCHAR},#{pwd,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR}
+        #{sex,jdbcType=VARCHAR},#{year,jdbcType=VARCHAR},#{major,jdbcType=VARCHAR})
+    </insert>
 </mapper>
