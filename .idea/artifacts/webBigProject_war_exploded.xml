@@ -24,8 +24,8 @@
           <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.6" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.6" />
           <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
-          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.3.0" />
-          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.1.0" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.2.5" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.1.1" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.6" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
         </element>
