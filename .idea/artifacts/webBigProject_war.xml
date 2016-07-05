@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="webBigProject:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="ssm.war">
+      <element id="artifact" artifact-name="webBigProject:war exploded" />
+    </root>
+  </artifact>
+</component>
