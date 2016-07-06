@@ -17,13 +17,13 @@ public class StudentService implements IStudentService {
     private IStudentDao studentDao;
 
     @Override
-    public boolean login(String id, String pwd) {
+    public Student login(String id, String pwd) {
 
-        String truePwd = studentDao.selectById(id).getPwd();
-        if (truePwd.equals(pwd)) {
-            return true;
+        Student student = studentDao.selectById(id);
+        if (student.getPwd().equals(pwd)) {
+            return student;
         }
-        return false;
+        return null;
     }
 
     @Override
@@ -40,4 +40,5 @@ public class StudentService implements IStudentService {
     public boolean selectCource() {
         return false;
     }
+
 }

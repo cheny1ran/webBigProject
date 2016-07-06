@@ -10,9 +10,10 @@
         <result column="place" property="place" jdbcType="VARCHAR"/>
         <result column="amount" property="amount" jdbcType="INTEGER" />
         <result column="detail" property="detail" jdbcType="VARCHAR" />
+        <result column="selected" property="selected" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id,name,time,credit,belong,place,amount,detail
+        id,name,time,credit,belong,place,amount,detail,selected
     </sql>
 
     <select id="selectAll" resultMap="ClzMap">
@@ -25,8 +26,8 @@
     </select>
 
     <insert id="insert" parameterType="Clz">
-        INSERT INTO course (id,name,time,credit,belong,place,amount,detail)
+        INSERT INTO course (id,name,time,credit,belong,place,amount,detail,selected)
         VALUES (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{time,jdbcType=VARCHAR},#{credit,jdbcType=VARCHAR},
-        #{belong,jdbcType=VARCHAR},#{place,jdbcType=VARCHAR},#{amount,jdbcType=INTEGER},#{detail,jdbcType=VARCHAR})
+        #{belong,jdbcType=VARCHAR},#{place,jdbcType=VARCHAR},#{amount,jdbcType=INTEGER},#{detail,jdbcType=VARCHAR},#{selected,jdbcType=INTEGER})
     </insert>
 </mapper>

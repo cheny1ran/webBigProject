@@ -18,6 +18,12 @@
 
     <title>用户登陆</title>
 </head>
+<%
+    String id=null;
+    if(session!=null) {
+        id = (String) session.getAttribute("user");
+    }
+%>
 
 <body role="document">
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -39,6 +45,17 @@
                 <li><a href="#contact">我的课程</a></li>
                 <li><a href="#contact">关于我们</a></li>
             </ul>
+            <%
+                if (id != null) {
+            %>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a><%=id%></a></li>
+                <li><a>欢迎您!</a></li>
+            </ul>
+            <%
+            } else {
+            %>
             <form class="navbar-form navbar-right" action="/login" method="post">
                 <div class="form-group">
                     <input type="text" placeholder="学号" class="form-control" name="id">
@@ -48,7 +65,9 @@
                 </div>
                 <button type="submit" class="btn btn-success">登陆</button>
             </form>
-
+            <%
+                }
+            %>
         </div><!--/.nav-collapse -->
 
     </div>
@@ -56,7 +75,7 @@
 
 <div class="container theme-showcase" role="main">
     <div class="jumbotron">
-        <h1>Hello, world!</h1>
+        <h1>欢迎登陆学生社团管理系统!</h1>
         <p>This is a template for a simple marketing or informational website. It includes a large callout called a
             jumbotron and three supporting pieces of content. Use it as a starting point to create something more
             unique.</p>
@@ -64,30 +83,31 @@
     </div>
 
 
-<div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-        <%
-            List<Course> clzs = (List<Course>) session.getAttribute("clzs");
-            if (!(clzs == null || clzs.isEmpty())) {
-                for (Course clz : clzs) {
-        %>
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <%
+                List<Course> clzs = (List<Course>) session.getAttribute("clzs");
+                if (!(clzs == null || clzs.isEmpty())) {
+                    for (Course clz : clzs) {
+            %>
 
-        <div class="col-md-4">
-            <h2><%=clz.getName()%>
-            </h2>
-            <p>所属社团:<%=clz.getBelong()%>
-            </p>
-            <p><%=clz.getDetail()%>
-            </p>
-            <p><a class="btn btn-default" href="/showDetail?id=<%=clz.getId()%>" role="button">View details &raquo;</a></p>
-        </div>
-        <%
+            <div class="col-md-4">
+                <h2><%=clz.getName()%>
+                </h2>
+                <p>所属社团:<%=clz.getBelong()%>
+                </p>
+                <p><%=clz.getDetail()%>
+                </p>
+                <p><a class="btn btn-default" href="/showDetail?id=<%=clz.getId()%>" role="button">View
+                    details &raquo;</a></p>
+            </div>
+            <%
+                    }
                 }
-            }
-        %>
+            %>
+        </div>
     </div>
-</div>
 </div>
 </div>
 </body>

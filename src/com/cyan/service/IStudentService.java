@@ -7,7 +7,7 @@ import com.cyan.entity.Student;
  */
 public interface IStudentService {
 
-    public boolean login(String id,String pwd);
+    public Student login(String id,String pwd);
     public boolean update(Student student);
     public boolean delete(String id);
 

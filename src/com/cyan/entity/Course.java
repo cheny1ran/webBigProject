@@ -23,9 +23,11 @@ public class Course {
     private Integer amount;
     //课程简介
     private String detail;
+    //课程已选人数
+    private Integer selected;
 
     public Course(Integer id, String name,String time,Integer credit,
-                  String belong,String type,String place,Integer amount,String detail){
+                  String belong,String type,String place,Integer amount,String detail,Integer selected){
         this.id=id;
         this.name=name;
         this.time=name;
@@ -35,6 +37,7 @@ public class Course {
         this.place=place;
         this.amount=amount;
         this.detail=detail;
+        this.selected=selected;
     }
 
     public Course(){};
@@ -109,5 +112,13 @@ public class Course {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public Integer getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Integer selected) {
+        this.selected = selected;
     }
 }

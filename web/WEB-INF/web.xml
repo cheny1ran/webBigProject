@@ -19,4 +19,17 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>*.mvc</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
 </web-app>
