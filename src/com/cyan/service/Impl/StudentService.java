@@ -1,7 +1,8 @@
-package com.cyan.service;
+package com.cyan.service.Impl;
 
 import com.cyan.dao.IStudentDao;
 import com.cyan.entity.Student;
+import com.cyan.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

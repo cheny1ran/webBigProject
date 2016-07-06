@@ -5,7 +5,7 @@ import com.cyan.entity.Student;
 /**
  * 功能描述:
  *
- * @Author wenli
+ * @Author cyan
  * @Date 16/7/5.
  */
 public interface IStudentDao {

@@ -3,10 +3,11 @@
 <configuration>
     <settings>
         <setting name="cacheEnabled" value="false" />
-
+        <!--<setting name="logImpl" value="LOG4J"/>-->
     </settings>
 
     <typeAliases>
         <typeAlias type="com.cyan.entity.Student" alias="Student" />
+        <typeAlias type="com.cyan.entity.Course" alias="Clz" />
     </typeAliases>
 </configuration>

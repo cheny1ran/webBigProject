@@ -1,5 +1,6 @@
-package com.cyan.dao;
+package com.cyan.dao.Impl;
 
+import com.cyan.dao.IStudentDao;
 import com.cyan.entity.Student;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.support.SqlSessionDaoSupport;

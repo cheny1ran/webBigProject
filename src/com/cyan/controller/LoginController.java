@@ -19,7 +19,7 @@ public class LoginController {
     @RequestMapping("/login")
     public String userLogin(@RequestParam String id,@RequestParam String pwd){
         if(studentService.login(id,pwd)){
-            return "login";
+            return "index";
         }
         return "404";
     }
