@@ -25,4 +25,9 @@ public class ClzService implements IClzService {
     public List<Course> getAllClz() {
         return clzDao.selectAll();
     }
+
+    @Override
+    public Course getClzById(String id) {
+        return clzDao.selectById(Integer.parseInt(id));
+    }
 }

@@ -9,18 +9,24 @@
         <result column="belong" property="belong" jdbcType="VARCHAR"/>
         <result column="place" property="place" jdbcType="VARCHAR"/>
         <result column="amount" property="amount" jdbcType="INTEGER" />
+        <result column="detail" property="detail" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="Base_Column_List">
-        id,name,time,credit,belong,place,amount
+        id,name,time,credit,belong,place,amount,detail
     </sql>
 
     <select id="selectAll" resultMap="ClzMap">
         SELECT <include refid="Base_Column_List" /> FROM course
     </select>
 
+    <select id="selectById" resultMap="ClzMap" parameterType="java.lang.Integer">
+        SELECT <include refid="Base_Column_List" /> FROM course
+        WHERE id=#{id,jdbcType=INTEGER}
+    </select>
+
     <insert id="insert" parameterType="Clz">
-        INSERT INTO course (id,name,time,credit,belong,place,amount)
-        VALUES (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{time,jdbcType=VARCHAR}
-        #{credit,jdbcType=VARCHAR},#{belong,jdbcType=VARCHAR},#{place,jdbcType=VARCHAR},#{amount,jdbcType=INTEGER})
+        INSERT INTO course (id,name,time,credit,belong,place,amount,detail)
+        VALUES (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{time,jdbcType=VARCHAR},#{credit,jdbcType=VARCHAR},
+        #{belong,jdbcType=VARCHAR},#{place,jdbcType=VARCHAR},#{amount,jdbcType=INTEGER},#{detail,jdbcType=VARCHAR})
     </insert>
 </mapper>

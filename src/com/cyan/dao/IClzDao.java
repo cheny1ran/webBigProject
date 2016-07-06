@@ -14,4 +14,6 @@ public interface IClzDao {
 
     public List<Course> selectAll();
 
+    public Course selectById(Integer id);
+
 }

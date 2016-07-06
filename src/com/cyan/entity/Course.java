@@ -21,8 +21,11 @@ public class Course {
     private String place;
     //课程总招收人数
     private Integer amount;
+    //课程简介
+    private String detail;
 
-    public Course(Integer id, String name,String time,Integer credit,String belong,String type,String place,Integer amount){
+    public Course(Integer id, String name,String time,Integer credit,
+                  String belong,String type,String place,Integer amount,String detail){
         this.id=id;
         this.name=name;
         this.time=name;
@@ -31,6 +34,7 @@ public class Course {
         this.type=type;
         this.place=place;
         this.amount=amount;
+        this.detail=detail;
     }
 
     public Course(){};
@@ -59,11 +63,11 @@ public class Course {
         this.time = time;
     }
 
-    public Integer getDuring() {
+    public Integer getCredit() {
         return credit;
     }
 
-    public void setDuring(Integer credit) {
+    public void setCredit(Integer credit) {
         this.credit = credit;
     }
 
@@ -99,4 +103,11 @@ public class Course {
         return amount;
     }
 
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
 }

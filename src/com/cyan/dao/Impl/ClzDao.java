@@ -21,7 +21,12 @@ public class ClzDao extends SqlSessionDaoSupport implements IClzDao{
 
     @Override
     public List<Course> selectAll() {
-
         return this.getSqlSession().selectList(SQL_NAMESPACE + ".selectAll");
+    }
+
+    @Override
+    public Course selectById(Integer id) {
+
+        return this.getSqlSession().selectOne(SQL_NAMESPACE + ".selectById",id);
     }
 }
