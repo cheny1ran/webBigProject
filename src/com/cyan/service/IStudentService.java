@@ -11,5 +11,8 @@ public interface IStudentService {
     public boolean update(Student student);
     public boolean delete(String id);
 
-    public boolean selectCource();
+    /**
+     *  @return 0 成功,1 已经选过此课程,2 已选满,-1 未知错误
+     */
+    public int selectCource(String stuId, Integer clzId);
 }

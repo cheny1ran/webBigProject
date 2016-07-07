@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 功能描述:
  *
- * @Author wenli
+ * @Author cyan
  * @Date 16/7/6.
  */
 public interface IClzDao {
@@ -15,5 +15,8 @@ public interface IClzDao {
     public List<Course> selectAll();
 
     public Course selectById(Integer id);
+
+    public void update(Course course);
+
 
 }

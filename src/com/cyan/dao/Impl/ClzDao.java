@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @Repository
-public class ClzDao extends SqlSessionDaoSupport implements IClzDao{
+public class ClzDao extends SqlSessionDaoSupport implements IClzDao {
 
     private static final String SQL_NAMESPACE = "Clz";
 
@@ -27,6 +27,11 @@ public class ClzDao extends SqlSessionDaoSupport implements IClzDao{
     @Override
     public Course selectById(Integer id) {
 
-        return this.getSqlSession().selectOne(SQL_NAMESPACE + ".selectById",id);
+        return this.getSqlSession().selectOne(SQL_NAMESPACE + ".selectById", id);
+    }
+
+    @Override
+    public void update(Course course) {
+        this.getSqlSession().update(SQL_NAMESPACE + ".update", course);
     }
 }

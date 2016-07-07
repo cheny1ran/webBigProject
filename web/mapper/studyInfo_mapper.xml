@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="StudyInfo">
+    <resultMap id="StudyMap" type="StudyInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="s_id" property="s_id" jdbcType="VARCHAR"/>
+        <result column="s_name" property="s_name" jdbcType="VARCHAR"/>
+        <result column="s_major" property="s_major" jdbcType="VARCHAR"/>
+        <result column="c_id" property="c_id" jdbcType="INTEGER"/>
+        <result column="c_name" property="c_name" jdbcType="VARCHAR"/>
+        <result column="c_belong" property="c_belong" jdbcType="VARCHAR"/>
+        <result column="clb_manager" property="clb_manager" jdbcType="VARCHAR"/>
+        <result column="clb_tel" property="clb_tel" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,s_id,s_name,s_major,c_id,c_name,c_belong,clb_manager,clb_tel
+    </sql>
+
+    <select id="selectByClzName" resultMap="StudyMap" parameterType="java.lang.String" >
+        SELECT <include refid="Base_Column_List" />
+        FROM study WHERE c_name = ${clzName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByClzId" resultMap="StudyMap" parameterType="java.lang.Integer" >
+        SELECT <include refid="Base_Column_List" />
+        FROM study WHERE c_id = ${clzId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByStuId" resultMap="StudyMap" parameterType="java.lang.String" >
+        SELECT <include refid="Base_Column_List" />
+        FROM study WHERE s_id = ${stuId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByClbName" resultMap="StudyMap" parameterType="java.lang.String" >
+        SELECT <include refid="Base_Column_List" />
+        FROM study WHERE clb_name = ${clbName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByStuIdAndClzId" resultMap="StudyMap" parameterType="java.util.Map">
+        SELECT <include refid="Base_Column_List" />
+        FROM study WHERE c_id = ${clzId} AND s_id = ${stuId}
+    </select>
+
+    <insert id="insert" parameterType="StudyInfo">
+        INSERT INTO study (s_id,s_name,s_major,c_id,c_name,c_belong,clb_manager,clb_tel)
+        VALUES (#{s_id,jdbcType=VARCHAR},#{s_name,jdbcType=VARCHAR},#{s_major,jdbcType=VARCHAR},
+        #{c_id,jdbcType=INTEGER},#{c_name,jdbcType=VARCHAR},#{c_belong,jdbcType=VARCHAR},
+        #{clb_manager,jdbcType=VARCHAR},#{clb_tel,jdbcType=VARCHAR})
+    </insert>
+</mapper>

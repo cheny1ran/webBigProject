@@ -20,11 +20,21 @@
 </head>
 <%
     String id=null;
+    String msg=null;
     if(session!=null) {
         id = (String) session.getAttribute("user");
+        msg=(String) session.getAttribute("msg");
+    }
+
+    if(msg!=null){
+
+%>
+<script>
+    alert(<%=msg%>);
+</script>
+<%
     }
 %>
-
 <body role="document">
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -40,7 +50,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">主页</a></li>
+                <li class="active"><a href="/index">主页</a></li>
                 <li><a href="#about">所有课程</a></li>
                 <li><a href="#contact">我的课程</a></li>
                 <li><a href="#contact">关于我们</a></li>

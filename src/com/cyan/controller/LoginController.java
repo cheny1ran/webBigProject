@@ -24,9 +24,12 @@ public class LoginController {
         Student student = studentService.login(id, pwd);
         if (student != null) {
             req.getSession().setAttribute("user", student.getName());
-            return "index";
+            req.getSession().setAttribute("userId", student.getId());
+            req.getSession().setAttribute("msg","登录成功!欢迎您 "+student.getName()+"!");
+        }else{
+            req.getSession().setAttribute("msg","登录失败!用户名或密码错误!");
         }
-        return "404";
+        return "index";
     }
 
 }
