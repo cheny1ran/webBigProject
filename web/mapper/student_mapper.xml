@@ -23,4 +23,12 @@
         VALUES (#{id,jdbcType=VARCHAR},#{pwd,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR}
         #{sex,jdbcType=VARCHAR},#{year,jdbcType=VARCHAR},#{major,jdbcType=VARCHAR})
     </insert>
+
+    <update id="update" parameterType="Student">
+        UPDATE student
+        <set >
+            pwd=#{pwd,jdbcType=VARCHAR}
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

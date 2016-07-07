@@ -54,6 +54,7 @@
                 <li><a><%=name%>
                 </a></li>
                 <li><a>欢迎您!</a></li>
+                <li><a href="/logout">退出登陆</a></li>
             </ul>
             <%
             } else {

@@ -15,7 +15,6 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <!-- Bootstrap core CSS -->
     <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
-
     <title>用户登陆</title>
 </head>
 <%
@@ -51,19 +50,20 @@
             %>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a><%=id%>
+                <li><a><%=id%> 欢迎您!
                 </a></li>
-                <li><a>欢迎您!</a></li>
+                <li><a id="change" href="#">修改密码</a></li>
+                <li><a href="/logout">退出登陆</a></li>
             </ul>
             <%
             } else {
             %>
             <form class="navbar-form navbar-right" action="/login" method="post">
                 <div class="form-group">
-                    <input type="text" placeholder="学号" class="form-control" name="id">
+                    <input type="text" placeholder="学号" class="form-control" name="id" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="密码" class="form-control" name="pwd">
+                    <input type="password" placeholder="密码" class="form-control" name="pwd" required>
                 </div>
                 <button type="submit" class="btn btn-success">登陆</button>
             </form>
@@ -78,52 +78,79 @@
 <div class="container theme-showcase" role="main">
     <%
         if (msg != null) {
+            if (msg == "修改成功!") {
     %>
-
-    <div class="alert alert-danger" style="margin-top: 50px" role="alert">
-        <strong><%=msg%>
-        </strong>
-    </div>
-
-    <%
-            session.setAttribute("msg", null);
-        }
-    %>
-    <div class="jumbotron">
-        <h1>欢迎登陆学生社团管理系统!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a
-            jumbotron and three supporting pieces of content. Use it as a starting point to create something more
-            unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-    </div>
-
-
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
+    <div class="alert alert-success" style="margin-top: 50px" role="alert">
+        <%
+        } else {
+        %>
+        <div class="alert alert-danger" style="margin-top: 50px" role="alert">
             <%
-                List<Course> clzs = (List<Course>) session.getAttribute("clzs");
-                if (!(clzs == null || clzs.isEmpty())) {
-                    for (Course clz : clzs) {
-            %>
-
-            <div class="col-md-4">
-                <h2><%=clz.getName()%>
-                </h2>
-                <p>所属社团:<%=clz.getBelong()%>
-                </p>
-                <p><%=clz.getDetail()%>
-                </p>
-                <p><a class="btn btn-default" href="/showDetail?id=<%=clz.getId()%>" role="button">View
-                    details &raquo;</a></p>
-            </div>
-            <%
-                    }
                 }
             %>
+            <strong><%=msg%>
+            </strong>
+        </div>
+
+        <%
+                session.setAttribute("msg", null);
+            }
+        %>
+        <div class="jumbotron">
+            <h1>欢迎登陆学生社团管理系统!</h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called a
+                jumbotron and three supporting pieces of content. Use it as a starting point to create something more
+                unique.</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        </div>
+
+
+        <div class="container">
+            <!-- Example row of columns -->
+            <div class="row">
+                <%
+                    List<Course> clzs = (List<Course>) session.getAttribute("clzs");
+                    if (!(clzs == null || clzs.isEmpty())) {
+                        for (Course clz : clzs) {
+                %>
+
+                <div class="col-md-4">
+                    <h2><%=clz.getName()%>
+                    </h2>
+                    <p>所属社团:<%=clz.getBelong()%>
+                    </p>
+                    <p><%=clz.getDetail()%>
+                    </p>
+                    <p><a class="btn btn-default" href="/showDetail?id=<%=clz.getId()%>" role="button">View
+                        details &raquo;</a></p>
+                </div>
+                <%
+                        }
+                    }
+                %>
+            </div>
         </div>
     </div>
 </div>
-</div>
+<script src="static/jquery-3.0.0.min.js"></script>
+<script src="static/layer.js"></script>
+<script>
+    $('#change').on('click', function () {
+        layer.open({
+            type: 1,
+            area: ['300px', '280px'],
+            shadeClose: false, //点击遮罩关闭
+            content: '<div class="container col-md-8">' +
+            '<form class="form-signin" action="/changePwd" method="post">' +
+            '<h2 class="form-signin-heading">修改密码</h2>' +
+            '<input type="password" name="old" class="form-control" placeholder="旧密码" required autofocus>' +
+            '<input type="password" name="newpwd" class="form-control" placeholder="新密码" required>' +
+            '<input type="password" name="newagain" class="form-control" placeholder="确认新密码" required>' +
+            '<button class="btn btn-lg btn-primary btn-block" type="submit">确认</button>' +
+            '</form>' +
+            '</div>'
+        });
+    });
+</script>
 </body>
 </html>

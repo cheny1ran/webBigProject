@@ -84,4 +84,14 @@ public class StudentService implements IStudentService {
         return -1;
     }
 
+    @Override
+    public boolean changePwd(String stuId, String old, String newpwd) {
+        Student s = login(stuId,old);
+        if(s!=null){
+            s.setPwd(newpwd);
+            studentDao.update(s);
+            return true;
+        }
+        return false;
+    }
 }
