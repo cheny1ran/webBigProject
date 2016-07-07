@@ -14,6 +14,8 @@ public interface IClzService {
 
     public List<Course> getAllClz();
 
-    public Course getClzById(String id);
+    public Course getClzById(Integer id);
+
+    public void update(Course course);
 
 }

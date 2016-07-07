@@ -26,6 +26,10 @@ public class StudyInfo {
     private String clb_manager;
     //课程负责人联系方式
     private String clb_tel;
+    //学分
+    private Integer c_credit;
+    //开课学期
+    private String c_time;
 
     public Integer getId() {
         return id;
@@ -97,5 +101,21 @@ public class StudyInfo {
 
     public void setClb_tel(String clb_tel) {
         this.clb_tel = clb_tel;
+    }
+
+    public Integer getC_credit() {
+        return c_credit;
+    }
+
+    public void setC_credit(Integer c_credit) {
+        this.c_credit = c_credit;
+    }
+
+    public String getC_time() {
+        return c_time;
+    }
+
+    public void setC_time(String c_time) {
+        this.c_time = c_time;
     }
 }

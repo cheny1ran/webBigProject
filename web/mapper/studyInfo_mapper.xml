@@ -11,29 +11,31 @@
         <result column="c_belong" property="c_belong" jdbcType="VARCHAR"/>
         <result column="clb_manager" property="clb_manager" jdbcType="VARCHAR"/>
         <result column="clb_tel" property="clb_tel" jdbcType="VARCHAR"/>
+        <result column="c_credit" property="c_credit" jdbcType="INTEGER"/>
+        <result column="c_time" property="c_time" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id,s_id,s_name,s_major,c_id,c_name,c_belong,clb_manager,clb_tel
+        id,s_id,s_name,s_major,c_id,c_name,c_belong,clb_manager,clb_tel,c_credit,c_time
     </sql>
 
     <select id="selectByClzName" resultMap="StudyMap" parameterType="java.lang.String" >
         SELECT <include refid="Base_Column_List" />
-        FROM study WHERE c_name = ${clzName,jdbcType=VARCHAR}
+        FROM study WHERE c_name = ${clzName}
     </select>
 
-    <select id="selectByClzId" resultMap="StudyMap" parameterType="java.lang.Integer" >
+    <select id="selectByClzId" resultMap="StudyMap" parameterType="java.util.Map" >
         SELECT <include refid="Base_Column_List" />
-        FROM study WHERE c_id = ${clzId,jdbcType=INTEGER}
+        FROM study WHERE c_id = ${clzId}
     </select>
 
-    <select id="selectByStuId" resultMap="StudyMap" parameterType="java.lang.String" >
+    <select id="selectByStuId" resultMap="StudyMap" parameterType="java.util.Map" >
         SELECT <include refid="Base_Column_List" />
-        FROM study WHERE s_id = ${stuId,jdbcType=VARCHAR}
+        FROM study WHERE s_id = ${stuId}
     </select>
 
     <select id="selectByClbName" resultMap="StudyMap" parameterType="java.lang.String" >
         SELECT <include refid="Base_Column_List" />
-        FROM study WHERE clb_name = ${clbName,jdbcType=VARCHAR}
+        FROM study WHERE clb_name = ${clbName}
     </select>
 
     <select id="selectByStuIdAndClzId" resultMap="StudyMap" parameterType="java.util.Map">
@@ -42,9 +44,14 @@
     </select>
 
     <insert id="insert" parameterType="StudyInfo">
-        INSERT INTO study (s_id,s_name,s_major,c_id,c_name,c_belong,clb_manager,clb_tel)
+        INSERT INTO study (s_id,s_name,s_major,c_id,c_name,c_belong,clb_manager,clb_tel,c_credit,c_time)
         VALUES (#{s_id,jdbcType=VARCHAR},#{s_name,jdbcType=VARCHAR},#{s_major,jdbcType=VARCHAR},
         #{c_id,jdbcType=INTEGER},#{c_name,jdbcType=VARCHAR},#{c_belong,jdbcType=VARCHAR},
-        #{clb_manager,jdbcType=VARCHAR},#{clb_tel,jdbcType=VARCHAR})
+        #{clb_manager,jdbcType=VARCHAR},#{clb_tel,jdbcType=VARCHAR},#{c_credit,jdbcType=INTEGER},#{c_time,jdbcType=VARCHAR})
     </insert>
+
+    <delete id="delete" parameterType="java.util.Map">
+        DELETE FROM study WHERE c_id = ${clzId} AND s_id = ${stuId}
+    </delete>
+
 </mapper>

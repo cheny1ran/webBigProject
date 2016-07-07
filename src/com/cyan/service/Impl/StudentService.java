@@ -66,6 +66,8 @@ public class StudentService implements IStudentService {
                     studyInfo.setS_id(stuId);
                     studyInfo.setS_name(s.getName());
                     studyInfo.setS_major(s.getMajor());
+                    studyInfo.setC_credit(c.getCredit());
+                    studyInfo.setC_time(c.getTime());
                     studyInfoDao.insert(studyInfo);
 
                     c.setSelected(c.getSelected() + 1);

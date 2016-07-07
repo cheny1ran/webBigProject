@@ -14,7 +14,7 @@ public interface IStudyInfoDao {
 
     public List<StudyInfo> selectByClzName(String clzName);
 
-    public List<StudyInfo> selectByClzId(String clzId);
+    public List<StudyInfo> selectByClzId(Integer clzId);
 
     public List<StudyInfo> selectByStuId(String stuId);
 
@@ -23,5 +23,7 @@ public interface IStudyInfoDao {
     public StudyInfo check(String stuId,Integer clzId);
 
     public void insert(StudyInfo studyInfo);
+
+    public void delete(String stuId,Integer clzId);
 
 }

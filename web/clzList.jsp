@@ -2,8 +2,8 @@
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: cyan
-  Date: 16/7/5
-  Time: 11:19
+  Date: 16/7/7
+  Time: 17:46
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -16,17 +16,17 @@
     <!-- Bootstrap core CSS -->
     <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <title>用户登陆</title>
+    <title>所有课程</title>
 </head>
+<body>
 <%
-    String id = null;
-    String msg = null;
+    String name = null;
+    int num=1;
+    List<Course> courses = (List<Course>) session.getAttribute("courses");
     if (session != null) {
-        id = (String) session.getAttribute("user");
-        msg = (String) session.getAttribute("msg");
+        name = (String) session.getAttribute("user");
     }
 %>
-<body role="document">
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -41,17 +41,17 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/index">主页</a></li>
-                <li><a href="/showAllClasses">所有课程</a></li>
+                <li><a href="/index">主页</a></li>
+                <li class="active"><a href="/showAllClasses">所有课程</a></li>
                 <li><a href="/showMyClasses">我的课程</a></li>
                 <li><a href="#contact">关于我们</a></li>
             </ul>
             <%
-                if (id != null) {
+                if (name != null) {
             %>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a><%=id%>
+                <li><a><%=name%>
                 </a></li>
                 <li><a>欢迎您!</a></li>
             </ul>
@@ -76,54 +76,42 @@
 </nav>
 
 <div class="container theme-showcase" role="main">
-    <%
-        if (msg != null) {
-    %>
 
-    <div class="alert alert-danger" style="margin-top: 50px" role="alert">
-        <strong><%=msg%>
-        </strong>
-    </div>
+    <ol class="breadcrumb" style="margin-top: 100px">
+        <li><a href="/index">首页</a></li>
+        <li class="active">所有课程</li>
+    </ol>
 
-    <%
-            session.setAttribute("msg", null);
-        }
-    %>
-    <div class="jumbotron">
-        <h1>欢迎登陆学生社团管理系统!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a
-            jumbotron and three supporting pieces of content. Use it as a starting point to create something more
-            unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-    </div>
-
-
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-            <%
-                List<Course> clzs = (List<Course>) session.getAttribute("clzs");
-                if (!(clzs == null || clzs.isEmpty())) {
-                    for (Course clz : clzs) {
-            %>
-
-            <div class="col-md-4">
-                <h2><%=clz.getName()%>
-                </h2>
-                <p>所属社团:<%=clz.getBelong()%>
-                </p>
-                <p><%=clz.getDetail()%>
-                </p>
-                <p><a class="btn btn-default" href="/showDetail?id=<%=clz.getId()%>" role="button">View
-                    details &raquo;</a></p>
-            </div>
-            <%
-                    }
-                }
-            %>
-        </div>
-    </div>
-</div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>课程名称</th>
+            <th>所属社团</th>
+            <th>学分</th>
+            <th>开课学期</th>
+            <th>课程容量</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%
+            for(Course c:courses){
+        %>
+        <tr>
+            <td><%=num++%></td>
+            <td><%=c.getName()%></td>
+            <td><%=c.getBelong()%></td>
+            <td><%=c.getCredit()%></td>
+            <td><%=c.getTime()%></td>
+            <td><%=c.getSelected()%> / <%=c.getAmount()%></td>
+            <td><a class="btn btn-primary" href="/showDetail?id=<%=c.getId()%>">详情</a></td>
+        </tr>
+        <%
+            }
+        %>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

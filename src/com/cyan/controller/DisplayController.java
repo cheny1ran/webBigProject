@@ -1,7 +1,9 @@
 package com.cyan.controller;
 
 import com.cyan.entity.Course;
+import com.cyan.entity.StudyInfo;
 import com.cyan.service.IClzService;
+import com.cyan.service.IStudyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,10 @@ import java.util.List;
 public class DisplayController {
 
     @Autowired
-    IClzService clzService;
+    private IClzService clzService;
+
+    @Autowired
+    private IStudyService studyService;
 
     @RequestMapping("/index")
     public String displayAll(HttpServletRequest req) {
@@ -32,10 +37,45 @@ public class DisplayController {
     }
 
     @RequestMapping("/showDetail")
-    public String showDetail(@RequestParam String id, HttpServletRequest req){
-        Course course = clzService.getClzById(id);
-        req.getSession().setAttribute("course",course);
+    public String showDetail(@RequestParam String id, HttpServletRequest req) {
+        Course course = clzService.getClzById(Integer.parseInt(id));
+        req.getSession().setAttribute("course", course);
         return "detail";
+    }
+
+    @RequestMapping("/showStudent")
+    public String showStudents(HttpServletRequest req) {
+        try {
+            Integer clzId = Integer.parseInt(req.getParameter("id"));
+            List<StudyInfo> students = studyService.getAllStuByClzId(clzId);
+
+            req.getSession().setAttribute("students", students);
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return "404";
+        }
+
+        return "stulist";
+
+    }
+
+    @RequestMapping("/showAllClasses")
+    public String showAllClzs(HttpServletRequest req) {
+        List<Course> courses = clzService.getAllClz();
+        req.getSession().setAttribute("courses", courses);
+        return "clzList";
+    }
+
+    @RequestMapping("/showMyClasses")
+    public String showMyClzs(HttpServletRequest req) {
+        String id = (String) req.getSession().getAttribute("userId");
+        List<StudyInfo> studyInfos=null;
+        if(id!=null){
+            studyInfos = studyService.getAllClzByStuId(id);
+        }
+        req.getSession().setAttribute("clzs", studyInfos);
+        return "myClzs";
     }
 
 }

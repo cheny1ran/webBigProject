@@ -19,17 +19,10 @@
 
 <%
     String name = null;
-    String msg=null;
+    String msg = null;
     if (session != null) {
         name = (String) session.getAttribute("user");
         msg = (String) session.getAttribute("msg");
-    }
-    if(msg!=null){
-%>
-<script>
-    alert(<%=msg%>);
-</script>
-<%
     }
 %>
 
@@ -49,8 +42,8 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/index">主页</a></li>
-                <li><a href="#about">所有课程</a></li>
-                <li><a href="#contact">我的课程</a></li>
+                <li><a href="/showAllClasses">所有课程</a></li>
+                <li><a href="/showMyClasses">我的课程</a></li>
                 <li><a href="#contact">关于我们</a></li>
             </ul>
             <%
@@ -94,6 +87,27 @@
         <li><a href="/index">首页</a></li>
         <li class="active">课程详情</li>
     </ol>
+    <%
+        if (msg != null) {
+            if (msg.equals("选课成功!")) {
+    %>
+    <div class="alert alert-success" role="alert">
+        <strong><%=msg%>
+        </strong>
+    </div>
+    <%
+    } else {
+    %>
+    <div class="alert alert-danger" role="alert">
+        <strong><%=msg%>
+        </strong>
+    </div>
+
+    <%
+            }
+            session.setAttribute("msg",null);
+        }
+    %>
     <div class="container">
 
         <div class="page-header">

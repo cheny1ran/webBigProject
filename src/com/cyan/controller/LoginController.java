@@ -25,11 +25,11 @@ public class LoginController {
         if (student != null) {
             req.getSession().setAttribute("user", student.getName());
             req.getSession().setAttribute("userId", student.getId());
-            req.getSession().setAttribute("msg","登录成功!欢迎您 "+student.getName()+"!");
+//            req.getSession().setAttribute("msg","登录成功!欢迎您 "+student.getName()+"!");
         }else{
             req.getSession().setAttribute("msg","登录失败!用户名或密码错误!");
         }
-        return "index";
+        return "redirect:/index";
     }
 
 }

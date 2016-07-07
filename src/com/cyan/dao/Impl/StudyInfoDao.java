@@ -27,13 +27,17 @@ public class StudyInfoDao extends SqlSessionDaoSupport implements IStudyInfoDao 
     }
 
     @Override
-    public List<StudyInfo> selectByClzId(String clzId) {
-        return this.getSqlSession().selectList(SQL_NAMESPACE + ".selectByClzId", clzId);
+    public List<StudyInfo> selectByClzId(Integer clzId) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("clzId", clzId);
+        return this.getSqlSession().selectList(SQL_NAMESPACE + ".selectByClzId", map);
     }
 
     @Override
     public List<StudyInfo> selectByStuId(String stuId) {
-        return this.getSqlSession().selectList(SQL_NAMESPACE + ".selectByStuId", stuId);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("stuId", stuId);
+        return this.getSqlSession().selectList(SQL_NAMESPACE + ".selectByStuId", map);
     }
 
     @Override
@@ -53,5 +57,15 @@ public class StudyInfoDao extends SqlSessionDaoSupport implements IStudyInfoDao 
     @Override
     public void insert(StudyInfo studyInfo) {
         this.getSqlSession().insert(SQL_NAMESPACE + ".insert", studyInfo);
+    }
+
+    @Override
+    public void delete(String stuId, Integer clzId) {
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("stuId", stuId);
+        map.put("clzId", clzId);
+
+        this.getSqlSession().delete(SQL_NAMESPACE + ".delete", map);
     }
 }

@@ -27,7 +27,12 @@ public class ClzService implements IClzService {
     }
 
     @Override
-    public Course getClzById(String id) {
-        return clzDao.selectById(Integer.parseInt(id));
+    public Course getClzById(Integer id) {
+        return clzDao.selectById(id);
+    }
+
+    @Override
+    public void update(Course course) {
+        clzDao.update(course);
     }
 }

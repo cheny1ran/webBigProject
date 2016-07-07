@@ -1,7 +1,9 @@
 package com.cyan.controller;
 
 import com.cyan.entity.Course;
+import com.cyan.service.IClzService;
 import com.cyan.service.IStudentService;
+import com.cyan.service.IStudyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,13 @@ public class SelectController {
 
     @Autowired
     private IStudentService studentService;
+
+    @Autowired
+    private IStudyService studyService;
+
+    @Autowired
+    private IClzService clzService;
+
 
     @RequestMapping("/selectClz")
     public String selectClz(HttpServletRequest req) {
@@ -41,6 +50,26 @@ public class SelectController {
         }
         req.getSession().setAttribute("msg", msg);
         return "detail";
+    }
+
+    @RequestMapping("/delCourse")
+    public synchronized String delClz(HttpServletRequest req){
+        try {
+            String stuId = (String) req.getSession().getAttribute("userId");
+            Integer clzId =Integer.parseInt(req.getParameter("id"));
+
+            studyService.delCourse(stuId,clzId);
+            Course c=clzService.getClzById(clzId);
+            c.setSelected(c.getSelected()-1);
+
+            clzService.update(c);
+
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+            return "404";
+        }
+        req.getSession().setAttribute("msg","删除成功!");
+        return "redirect:/showMyClasses";
     }
 
 }
