@@ -22,10 +22,6 @@ public class StudyInfo {
     private String c_name;
     //课程所属社团
     private String c_belong;
-    //课程负责人
-    private String clb_manager;
-    //课程负责人联系方式
-    private String clb_tel;
     //学分
     private Integer c_credit;
     //开课学期
@@ -85,22 +81,6 @@ public class StudyInfo {
 
     public void setC_belong(String c_belong) {
         this.c_belong = c_belong;
-    }
-
-    public String getClb_manager() {
-        return clb_manager;
-    }
-
-    public void setClb_manager(String clb_manager) {
-        this.clb_manager = clb_manager;
-    }
-
-    public String getClb_tel() {
-        return clb_tel;
-    }
-
-    public void setClb_tel(String clb_tel) {
-        this.clb_tel = clb_tel;
     }
 
     public Integer getC_credit() {

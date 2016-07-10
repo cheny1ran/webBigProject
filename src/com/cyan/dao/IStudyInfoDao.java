@@ -12,13 +12,10 @@ import java.util.List;
  */
 public interface IStudyInfoDao {
 
-    public List<StudyInfo> selectByClzName(String clzName);
 
     public List<StudyInfo> selectByClzId(Integer clzId);
 
     public List<StudyInfo> selectByStuId(String stuId);
-
-    public List<StudyInfo> selectByClbName(String clbName);
 
     public StudyInfo check(String stuId,Integer clzId);
 

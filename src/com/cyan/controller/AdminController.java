@@ -5,6 +5,7 @@ import com.cyan.entity.Student;
 import com.cyan.entity.StudyInfo;
 import com.cyan.service.IAdminService;
 import com.cyan.service.IStudentService;
+import com.cyan.service.IStudyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,9 @@ public class AdminController {
 
     @Autowired
     private IStudentService studentService;
+
+    @Autowired
+    private IStudyService studyService;
 
     @RequestMapping(value = "/changeStudent", method = RequestMethod.GET)
     public String changeStu(@RequestParam String id, HttpServletRequest req) {
@@ -123,7 +127,7 @@ public class AdminController {
             e.printStackTrace();
         } catch (Exception e) {
             msg = "添加失败";
-        }finally {
+        } finally {
             req.getSession().setAttribute("msg", msg);
             return "redirect:/courseManage";
         }
@@ -180,23 +184,28 @@ public class AdminController {
 
 
     @RequestMapping("/chooseManage")
-    public String chooseManage(HttpServletRequest req){
+    public String chooseManage(HttpServletRequest req) {
         List<StudyInfo> records = adminService.getAllStudyInfo();
         req.getSession().setAttribute("records", records);
         return "allChoose";
     }
 
     @RequestMapping("/delStudyInfo")
-    public String delStudyInfo(HttpServletRequest req,@RequestParam String id){
-        String msg=null;
-        try{
-            adminService.delStudyInfo(Integer.parseInt(id));
+    public String delStudyInfo(HttpServletRequest req, @RequestParam String id) {
+        String msg = null;
+        try {
+            Integer stdId = Integer.parseInt(id);
+            StudyInfo info = adminService.getStudyById(stdId);
+            Course c = adminService.getCourseById(info.getC_id());
+            c.setSelected(c.getSelected()-1);
+            adminService.updateCourse(c);
+            adminService.delStudyInfo(stdId);
             msg = "删除成功";
-        }catch (Exception e){
-            msg="删除失败";
+        } catch (Exception e) {
+            msg = "删除失败";
             e.printStackTrace();
-        }finally {
-            req.getSession().setAttribute("msg",msg);
+        } finally {
+            req.getSession().setAttribute("msg", msg);
             return "redirect:/chooseManage";
         }
     }

@@ -38,4 +38,6 @@ public interface IAdminDao {
     public void addStudyInfo(StudyInfo studyInfo);
 
     public void delStudyInfo(Integer id);
+
+    public StudyInfo selectById(Integer id);
 }

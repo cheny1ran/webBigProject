@@ -22,11 +22,6 @@ public class StudyInfoDao extends SqlSessionDaoSupport implements IStudyInfoDao 
     private static final String SQL_NAMESPACE = "StudyInfo";
 
     @Override
-    public List<StudyInfo> selectByClzName(String clzName) {
-        return this.getSqlSession().selectList(SQL_NAMESPACE + ".selectByClzName", clzName);
-    }
-
-    @Override
     public List<StudyInfo> selectByClzId(Integer clzId) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("clzId", clzId);
@@ -38,11 +33,6 @@ public class StudyInfoDao extends SqlSessionDaoSupport implements IStudyInfoDao 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("stuId", stuId);
         return this.getSqlSession().selectList(SQL_NAMESPACE + ".selectByStuId", map);
-    }
-
-    @Override
-    public List<StudyInfo> selectByClbName(String clbName) {
-        return this.getSqlSession().selectList(SQL_NAMESPACE + ".selectByClbName", clbName);
     }
 
     @Override
@@ -68,4 +58,5 @@ public class StudyInfoDao extends SqlSessionDaoSupport implements IStudyInfoDao 
 
         this.getSqlSession().delete(SQL_NAMESPACE + ".delete", map);
     }
+
 }

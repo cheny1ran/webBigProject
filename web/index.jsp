@@ -53,7 +53,7 @@
                 <li><a><%=id%> 欢迎您!
                 </a></li>
                 <li><a id="change" href="#">修改密码</a></li>
-                <li><a href="/logout">退出登陆</a></li>
+                <li><a href="/logout">退出登录</a></li>
             </ul>
             <%
             } else {
@@ -65,7 +65,7 @@
                 <div class="form-group">
                     <input type="password" placeholder="密码" class="form-control" name="pwd" required>
                 </div>
-                <button type="submit" class="btn btn-success">登陆</button>
+                <button type="submit" class="btn btn-success">登录</button>
             </form>
             <%
                 }

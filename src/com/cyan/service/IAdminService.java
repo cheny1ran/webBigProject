@@ -40,4 +40,7 @@ public interface IAdminService {
     public void addStudyInfo(StudyInfo studyInfo);
 
     public void delStudyInfo(Integer id);
+
+    public StudyInfo getStudyById(Integer id);
+
 }

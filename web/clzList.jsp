@@ -44,7 +44,7 @@
                 <li><a href="/index">主页</a></li>
                 <li class="active"><a href="/showAllClasses">所有课程</a></li>
                 <li><a href="/showMyClasses">我的课程</a></li>
-                <li><a href="/adminLogin.jsp">社团登陆</a></li>
+                <li><a href="/adminLogin.jsp">社团登录</a></li>
             </ul>
             <%
                 if (name != null) {
@@ -54,7 +54,7 @@
                 <li><a><%=name%> 欢迎您!
                 </a></li>
                 <li><a href="#" id="change">修改密码</a></li>
-                <li><a href="/logout">退出登陆</a></li>
+                <li><a href="/logout">退出登录</a></li>
             </ul>
             <%
             } else {
@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <input type="password" placeholder="密码" class="form-control" name="pwd">
                 </div>
-                <button type="submit" class="btn btn-success">登陆</button>
+                <button type="submit" class="btn btn-success">登录</button>
             </form>
             <%
                 }

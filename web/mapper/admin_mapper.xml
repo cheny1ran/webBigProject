@@ -111,4 +111,9 @@
     <delete id="delStudyInfo" parameterType="java.util.Map">
         DELETE FROM study WHERE id=#{id}
     </delete>
+
+    <select id="selectByStudyId" parameterType="java.util.Map" resultType="StudyInfo">
+        SELECT * FROM study WHERE id=${id};
+    </select>
+
 </mapper>

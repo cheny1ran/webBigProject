@@ -198,4 +198,9 @@ public class AdminService implements IAdminService {
     public void delStudyInfo(Integer id) {
         adminDao.delStudyInfo(id);
     }
+
+    @Override
+    public StudyInfo getStudyById(Integer id) {
+        return adminDao.selectById(id);
+    }
 }

@@ -96,4 +96,11 @@ public class AdminDao extends SqlSessionDaoSupport implements IAdminDao {
         map.put("id", id);
         this.getSqlSession().delete(SQL_NAMESPACE+".delStudyInfo",map);
     }
+
+    @Override
+    public StudyInfo selectById(Integer id) {
+        Map<String,Integer> map=new HashMap<String, Integer>();
+        map.put("id",id);
+        return this.getSqlSession().selectOne(SQL_NAMESPACE + ".selectByStudyId", map);
+    }
 }
