@@ -18,12 +18,6 @@
         FROM student WHERE id = ${id}
     </select>
 
-    <insert id="insert" parameterType="Student">
-        INSERT INTO student (id,pwd,name,sex,year,major)
-        VALUES (#{id,jdbcType=VARCHAR},#{pwd,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR}
-        #{sex,jdbcType=VARCHAR},#{year,jdbcType=VARCHAR},#{major,jdbcType=VARCHAR})
-    </insert>
-
     <update id="update" parameterType="Student">
         UPDATE student
         <set >

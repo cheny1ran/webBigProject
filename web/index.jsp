@@ -43,7 +43,7 @@
                 <li class="active"><a href="/index">主页</a></li>
                 <li><a href="/showAllClasses">所有课程</a></li>
                 <li><a href="/showMyClasses">我的课程</a></li>
-                <li><a href="#contact">关于我们</a></li>
+                <li><a href="/adminLogin.jsp">社团登录</a></li>
             </ul>
             <%
                 if (id != null) {
@@ -101,7 +101,6 @@
             <p>This is a template for a simple marketing or informational website. It includes a large callout called a
                 jumbotron and three supporting pieces of content. Use it as a starting point to create something more
                 unique.</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
         </div>
 
 
@@ -132,8 +131,8 @@
         </div>
     </div>
 </div>
-<script src="static/jquery-3.0.0.min.js"></script>
-<script src="static/layer.js"></script>
+<script src="static/js/jquery-3.0.0.min.js"></script>
+<script src="static/js/layer.js"></script>
 <script>
     $('#change').on('click', function () {
         layer.open({

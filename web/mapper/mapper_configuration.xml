@@ -10,5 +10,6 @@
         <typeAlias type="com.cyan.entity.Student" alias="Student" />
         <typeAlias type="com.cyan.entity.Course" alias="Clz" />
         <typeAlias type="com.cyan.entity.StudyInfo" alias="StudyInfo" />
+        <typeAlias type="com.cyan.entity.Admin" alias="Admin"/>
     </typeAliases>
 </configuration>

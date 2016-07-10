@@ -25,41 +25,4 @@
         WHERE id=#{id,jdbcType=INTEGER}
     </select>
 
-    <insert id="insert" parameterType="Clz">
-        INSERT INTO course (id,name,time,credit,belong,place,amount,detail,selected)
-        VALUES (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{time,jdbcType=VARCHAR},#{credit,jdbcType=VARCHAR},
-        #{belong,jdbcType=VARCHAR},#{place,jdbcType=VARCHAR},#{amount,jdbcType=INTEGER},#{detail,jdbcType=VARCHAR},#{selected,jdbcType=INTEGER})
-    </insert>
-
-    <update id="update" parameterType="Clz">
-        UPDATE course
-        <set >
-            <if test="name != null" >
-                name = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="time != null" >
-                time = #{time,jdbcType=VARCHAR},
-            </if>
-            <if test="credit != null" >
-                credit = #{credit,jdbcType=INTEGER},
-            </if>
-            <if test="belong != null" >
-                belong = #{belong,jdbcType=VARCHAR},
-            </if>
-            <if test="place != null" >
-                place = #{place,jdbcType=VARCHAR},
-            </if>
-            <if test="amount != null" >
-                amount = #{amount,jdbcType=INTEGER},
-            </if>
-            <if test="detail != null" >
-                detail = #{detail,jdbcType=VARCHAR},
-            </if>
-            <if test="selected != null" >
-                selected = #{selected,jdbcType=INTEGER},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-
 </mapper>

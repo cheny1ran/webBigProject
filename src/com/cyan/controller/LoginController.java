@@ -1,6 +1,7 @@
 package com.cyan.controller;
 
 import com.cyan.entity.Student;
+import com.cyan.service.IAdminService;
 import com.cyan.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class LoginController {
 
     @Autowired
     private IStudentService studentService;
+
+    @Autowired
+    private IAdminService adminService;
 
     @RequestMapping("/login")
     public String userLogin(@RequestParam String id, @RequestParam String pwd, HttpServletRequest req) {
@@ -53,6 +57,16 @@ public class LoginController {
             req.getSession().setAttribute("msg", "修改失败!");
         }
         return "redirect:/index";
+    }
+
+    @RequestMapping("/adminLogin")
+    public String adminLogin(@RequestParam String username,@RequestParam String pwd){
+        if (username.length() > 0 && username.length() < 20 && pwd.length() > 0 && pwd.length() < 20) {
+            if(adminService.login(username, pwd)){
+                return "admin";
+            }
+        }
+        return "adminLogin";
     }
 
 }

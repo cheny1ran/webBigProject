@@ -38,7 +38,9 @@ public class StudentService implements IStudentService {
 
     @Override
     public boolean update(Student student) {
-        return false;
+
+        studentDao.update(student);
+        return true;
     }
 
     @Override

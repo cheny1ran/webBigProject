@@ -1,7 +1,9 @@
 package com.cyan.controller;
 
 import com.cyan.entity.Course;
+import com.cyan.entity.Student;
 import com.cyan.entity.StudyInfo;
+import com.cyan.service.IAdminService;
 import com.cyan.service.IClzService;
 import com.cyan.service.IStudyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,10 @@ public class DisplayController {
 
     @Autowired
     private IStudyService studyService;
+
+    @Autowired
+    private IAdminService adminService;
+
 
     @RequestMapping("/index")
     public String displayAll(HttpServletRequest req) {
@@ -76,6 +82,13 @@ public class DisplayController {
         }
         req.getSession().setAttribute("clzs", studyInfos);
         return "myClzs";
+    }
+
+    @RequestMapping("/studentManage")
+    public String studentManage(HttpServletRequest req){
+        List<Student> students=adminService.getAllStudents();
+        req.getSession().setAttribute("students", students);
+        return "allStudents";
     }
 
 }

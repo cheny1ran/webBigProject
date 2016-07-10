@@ -44,16 +44,16 @@
                 <li><a href="/index">主页</a></li>
                 <li><a href="/showAllClasses">所有课程</a></li>
                 <li><a href="/showMyClasses">我的课程</a></li>
-                <li><a href="#contact">关于我们</a></li>
+                <li><a href="/adminLogin.jsp">社团登陆</a></li>
             </ul>
             <%
                 if (name != null) {
             %>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a><%=name%>
+                <li><a><%=name%> 欢迎您!
                 </a></li>
-                <li><a>欢迎您!</a></li>
+                <li><a id="change">修改密码</a></li>
                 <li><a href="/logout">退出登陆</a></li>
             </ul>
             <%
@@ -189,6 +189,25 @@
         </div>
     </div>
 </div>
-
+<script src="static/js/jquery-3.0.0.min.js"></script>
+<script src="static/js/layer.js"></script>
+<script>
+    $('#change').on('click', function () {
+        layer.open({
+            type: 1,
+            area: ['300px', '280px'],
+            shadeClose: false, //点击遮罩关闭
+            content: '<div class="container col-md-8">' +
+            '<form class="form-signin" action="/changePwd" method="post">' +
+            '<h2 class="form-signin-heading">修改密码</h2>' +
+            '<input type="password" name="old" class="form-control" placeholder="旧密码" required autofocus>' +
+            '<input type="password" name="newpwd" class="form-control" placeholder="新密码" required>' +
+            '<input type="password" name="newagain" class="form-control" placeholder="确认新密码" required>' +
+            '<button class="btn btn-lg btn-primary btn-block" type="submit">确认</button>' +
+            '</form>' +
+            '</div>'
+        });
+    });
+</script>
 </body>
 </html>
