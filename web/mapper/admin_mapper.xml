@@ -24,6 +24,19 @@
         <result column="detail" property="detail" jdbcType="VARCHAR" />
         <result column="selected" property="selected" jdbcType="INTEGER"/>
     </resultMap>
+    <resultMap id="StudyMap" type="StudyInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="s_id" property="s_id" jdbcType="VARCHAR"/>
+        <result column="s_name" property="s_name" jdbcType="VARCHAR"/>
+        <result column="s_major" property="s_major" jdbcType="VARCHAR"/>
+        <result column="c_id" property="c_id" jdbcType="INTEGER"/>
+        <result column="c_name" property="c_name" jdbcType="VARCHAR"/>
+        <result column="c_belong" property="c_belong" jdbcType="VARCHAR"/>
+        <result column="clb_manager" property="clb_manager" jdbcType="VARCHAR"/>
+        <result column="clb_tel" property="clb_tel" jdbcType="VARCHAR"/>
+        <result column="c_credit" property="c_credit" jdbcType="INTEGER"/>
+        <result column="c_time" property="c_time" jdbcType="VARCHAR"/>
+    </resultMap>
     <select id="selectById" resultMap="AdminMap" parameterType="java.util.Map">
         SELECT * FROM admin WHERE id=#{id}
     </select>
@@ -66,42 +79,11 @@
         WHERE id=#{s.id,jdbcType=VARCHAR}
     </update>
 
-    <insert id="insert" parameterType="Clz">
-        INSERT INTO course (id,name,time,credit,belong,place,amount,detail,selected)
-        VALUES (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{time,jdbcType=VARCHAR},#{credit,jdbcType=VARCHAR},
+    <insert id="insertClz" parameterType="Clz">
+        INSERT INTO course (name,time,credit,belong,place,amount,detail,selected)
+        VALUES (#{name,jdbcType=VARCHAR},#{time,jdbcType=VARCHAR},#{credit,jdbcType=VARCHAR},
         #{belong,jdbcType=VARCHAR},#{place,jdbcType=VARCHAR},#{amount,jdbcType=INTEGER},#{detail,jdbcType=VARCHAR},#{selected,jdbcType=INTEGER})
     </insert>
-
-    <update id="update" parameterType="Clz">
-        UPDATE course
-        <set >
-            <if test="name != null" >
-                name = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="time != null" >
-                time = #{time,jdbcType=VARCHAR},
-            </if>
-            <if test="credit != null" >
-                credit = #{credit,jdbcType=INTEGER},
-            </if>
-            <if test="belong != null" >
-                belong = #{belong,jdbcType=VARCHAR},
-            </if>
-            <if test="place != null" >
-                place = #{place,jdbcType=VARCHAR},
-            </if>
-            <if test="amount != null" >
-                amount = #{amount,jdbcType=INTEGER},
-            </if>
-            <if test="detail != null" >
-                detail = #{detail,jdbcType=VARCHAR},
-            </if>
-            <if test="selected != null" >
-                selected = #{selected,jdbcType=INTEGER},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
 
     <insert id="insertStudent" parameterType="Student">
         INSERT INTO student (id,pwd,name,sex,year,major)
@@ -113,4 +95,20 @@
         DELETE FROM student WHERE id=${id}
     </delete>
 
+    <delete id="delCourse" parameterType="java.util.Map">
+        DELETE FROM course WHERE id=${id}
+    </delete>
+
+    <select id="selectAllStudyInfo" resultType="StudyInfo">
+        SELECT * FROM study ORDER BY c_id;
+    </select>
+
+    <insert id="insertStudyInfo" parameterType="StudyInfo">
+        INSERT INTO study (s_id,s_name,s_major,c_id,c_name,c_belong,c_credit,c_time)
+        VALUES (#{s_id},#{s_name},#{s_major},#{c_id},#{c_name},#{c_belong},#{c_credit},#{c_time})
+    </insert>
+
+    <delete id="delStudyInfo" parameterType="java.util.Map">
+        DELETE FROM study WHERE id=#{id}
+    </delete>
 </mapper>

@@ -14,7 +14,7 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <!-- Bootstrap core CSS -->
     <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>新学生信息</title>
+    <title>新课程信息</title>
     <style>
         body {
             padding-top: 100px;
@@ -45,8 +45,8 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/adminIndex">主页</a></li>
-                <li class="active"><a href="/studentManage">学生管理</a></li>
-                <li><a href="/courseManage">课程管理</a></li>
+                <li ><a href="/studentManage">学生管理</a></li>
+                <li class="active"><a href="/courseManage">课程管理</a></li>
                 <li><a href="/chooseManage">选课管理</a> </li>
                 <li><a href="/index">返回学生版主页</a></li>
             </ul>
@@ -56,36 +56,38 @@
 </nav>
 
 <div class="container">
-    <form action="/addStudent" method="post">
-        <h3>新学生信息</h3>
+    <form action="/addCourse" method="post">
+        <h3>新课程信息</h3>
         <div class="form-group">
-            <label for="id">学生学号</label>
-            <input type="text" class="form-control" id="id" name="id" placeholder="学号" required>
+            <label for="name">课程名</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="课程名" required>
         </div>
         <div class="form-group">
-            <label for="name">姓名</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="姓名" required>
+            <label for="time">开课学期</label>
+            <input type="text" class="form-control" id="time" name="time" placeholder="开课学期" required>
         </div>
         <div class="form-group">
-            <label for="pwd">密码</label>
-            <input type="text" class="form-control" id="pwd" name="pwd" placeholder="密码" required>
+            <label for="credit">课程学分</label>
+            <input type="text" class="form-control" id="credit" name="credit" placeholder="课程学分" required>
         </div>
         <div class="form-group">
-            <label for="boy">性别</label>&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="sex" value="男" id="boy" checked="true">男
-            <input type="radio" name="sex" value="女" id="girl">女
+            <label for="belong">所属社团</label>
+            <input type="text" class="form-control" id="belong" name="belong" placeholder="所属社团" required>
         </div>
         <div class="form-group">
-            <label for="major">学院专业</label>
-            <input type="text" class="form-control" id="major" name="major" placeholder="学院专业" required>
+            <label for="place">开课地点</label>
+            <input type="text" class="form-control" id="place" name="place" placeholder="开课地点" required>
         </div>
-
         <div class="form-group">
-            <label for="year">学年</label>
-            <input type="text" class="form-control" id="year" name="year" placeholder="学年" required>
+            <label for="amount">课程容量</label>
+            <input type="text" class="form-control" id="amount" name="amount" placeholder="课程容量" required>
+        </div>
+        <div class="form-group">
+            <label for="detail">课程描述</label>
+            <input type="text" class="form-control" id="detail" name="detail" placeholder="课程描述" required>
         </div>
         <button type="submit" class="btn btn-success">提交</button>
-        <a href="/studentManage" class="btn btn-default">返回</a>
+        <a href="/courseManage" class="btn btn-default">返回</a>
     </form>
 </div>
 </body>

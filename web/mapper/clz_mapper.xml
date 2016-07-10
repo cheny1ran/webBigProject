@@ -25,4 +25,35 @@
         WHERE id=#{id,jdbcType=INTEGER}
     </select>
 
+    <update id="update" parameterType="Clz">
+        UPDATE course
+        <set>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="time!= null" >
+                time = #{time,jdbcType=VARCHAR},
+            </if>
+            <if test="credit != null" >
+                credit = #{credit,jdbcType=INTEGER},
+            </if>
+            <if test="belong != null" >
+                belong = #{belong,jdbcType=VARCHAR},
+            </if>
+            <if test="place != null" >
+                place = #{place,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null" >
+                amount = #{amount,jdbcType=INTEGER},
+            </if>
+            <if test="detail != null" >
+                detail = #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="selected != null" >
+                selected = #{selected,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE id=#{id,jdbcType=INTEGER}
+    </update>
+
 </mapper>

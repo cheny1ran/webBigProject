@@ -1,5 +1,6 @@
 <%@ page import="com.cyan.entity.Student" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.cyan.entity.StudyInfo" %><%--
   Created by IntelliJ IDEA.
   User: cyan
   Date: 16/7/8
@@ -15,7 +16,7 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <!-- Bootstrap core CSS -->
     <link href="static/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>所有学生</title>
+    <title>选课记录</title>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -33,9 +34,9 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/adminIndex">主页</a></li>
-                <li class="active"><a href="/studentManage">学生管理</a></li>
+                <li><a href="/studentManage">学生管理</a></li>
                 <li><a href="/courseManage">课程管理</a></li>
-                <li><a href="/chooseManage">选课管理</a> </li>
+                <li class="active"><a href="/chooseManage">选课管理</a></li>
                 <li><a href="/index">返回学生版主页</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -43,7 +44,7 @@
     </div>
 </nav>
 <%
-    List<Student> students = (List<Student>) session.getAttribute("students");
+    List<StudyInfo> records = (List<StudyInfo>) session.getAttribute("records");
     String msg = (String) session.getAttribute("msg");
     int num = 1;
 %>
@@ -51,11 +52,11 @@
 
     <ol class="breadcrumb" style="margin-top: 100px">
         <li><a href="/adminIndex">首页</a></li>
-        <li class="active">学生管理</li>
+        <li class="active">选课管理</li>
     </ol>
-        <%
+    <%
         if (msg != null) {
-            if (msg .equals("添加成功")||msg.equals("更新成功")||msg.equals("删除成功")) {
+            if (msg.equals("添加成功") || msg.equals("更新成功") || msg.equals("删除成功")) {
     %>
     <div class="alert alert-success" style="margin-top: 50px" role="alert">
         <%
@@ -81,49 +82,73 @@
                 <th>编号</th>
                 <th>学生姓名</th>
                 <th>学号</th>
-                <th>密码</th>
                 <th>学院专业</th>
-                <th>性别</th>
-                <th>入学年份</th>
+                <th>课程编号</th>
+                <th>课程名</th>
+                <th>所属社团</th>
+                <th>学分</th>
+                <th>开课学期</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
             <%
-                for (Student s : students) {
+                for (StudyInfo s : records) {
             %>
             <tr>
                 <td><%=num++%>
                 </td>
-                <td><%=s.getName()%>
+                <td><%=s.getS_name()%>
                 </td>
-                <td><%=s.getId()%>
+                <td><%=s.getS_id()%>
                 </td>
-                <td><%=s.getPwd()%>
+                <td><%=s.getS_major()%>
                 </td>
-                <td><%=s.getMajor()%>
+                <td><%=s.getC_id()%>
                 </td>
-                <td><%=s.getSex()%>
+                <td><%=s.getC_name()%>
                 </td>
-                <td><%=s.getYear()%>
+                <td><%=s.getC_belong()%>
                 </td>
-                <%--<td><a href="/changeStudent?id=<%=s.getId()%>" class="btn btn-primary" id="changeStu">修改</a>--%>
-                <td><a href="/changeStudent?id=<%=s.getId()%>" class="btn btn-primary" id="changeStu">修改</a>
-                    <a href="/delStudent?id=<%=s.getId()%>" class="btn btn-danger">删除</a>
+                <td><%=s.getC_credit()%>
+                </td>
+                <td><%=s.getC_time()%>
+                </td>
+                <td>
+                    <a href="/delStudyInfo?id=<%=s.getId()%>" class="btn btn-danger">删除</a>
                 </td>
             </tr>
             <%
                 }
             %>
             <tr>
-                <td colspan="7">&nbsp</td>
-                <td><a href="addStudent.jsp" class="btn btn-success">添加新学生</a></td>
+                <td colspan="9">&nbsp</td>
+                <td><a href="#" class="btn btn-success" id="add">添加选课记录</a></td>
             </tr>
 
             </tbody>
         </table>
     </div>
-    <script type="text/javascript" src="static/js/jquery-3.0.0.min.js"></script>
-
+</div>
+<script type="text/javascript" src="static/js/jquery-3.0.0.min.js"></script>
+<script src="static/js/layer.js"></script>
+<script>
+    $('#add').on('click', function () {
+        layer.open({
+            type: 1,
+            area: ['300px', '280px'],
+            shadeClose: false, //点击遮罩关闭
+            content: '<div class="container col-md-8">' +
+            '<form class="form-signin" action="/changePwd" method="post">' +
+            '<h2 class="form-signin-heading">修改密码</h2>' +
+            '<input type="password" name="old" class="form-control" placeholder="旧密码" required autofocus>' +
+            '<input type="password" name="newpwd" class="form-control" placeholder="新密码" required>' +
+            '<input type="password" name="newagain" class="form-control" placeholder="确认新密码" required>' +
+            '<button class="btn btn-lg btn-primary btn-block" type="submit">确认</button>' +
+            '</form>' +
+            '</div>'
+        });
+    });
+</script>
 </body>
 </html>

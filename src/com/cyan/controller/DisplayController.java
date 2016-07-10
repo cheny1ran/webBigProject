@@ -91,4 +91,11 @@ public class DisplayController {
         return "allStudents";
     }
 
+    @RequestMapping("/courseManage")
+    public String courseManage(HttpServletRequest req){
+        List<Course> courses=adminService.getAllCourses();
+        req.getSession().setAttribute("courses", courses);
+        return "allCourses";
+    }
+
 }

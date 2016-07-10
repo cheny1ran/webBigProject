@@ -1,6 +1,8 @@
 package com.cyan.controller;
 
+import com.cyan.entity.Course;
 import com.cyan.entity.Student;
+import com.cyan.entity.StudyInfo;
 import com.cyan.service.IAdminService;
 import com.cyan.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 /**
  * 功能描述:
@@ -57,7 +60,7 @@ public class AdminController {
             msg = "更新失败";
         }
 
-        req.getSession().setAttribute("msg",msg);
+        req.getSession().setAttribute("msg", msg);
 
         return "redirect:/studentManage";
     }
@@ -84,17 +87,118 @@ public class AdminController {
             msg = "添加失败";
         }
 
-        req.getSession().setAttribute("msg",msg);
+        req.getSession().setAttribute("msg", msg);
 
         return "redirect:/studentManage";
     }
 
     @RequestMapping("delStudent")
-    public String delStudent(@RequestParam String id,HttpServletRequest req){
+    public String delStudent(@RequestParam String id, HttpServletRequest req) {
         adminService.delStudent(id);
-        req.getSession().setAttribute("msg","删除成功");
+        req.getSession().setAttribute("msg", "删除成功");
         return "redirect:/studentManage";
     }
 
+    @RequestMapping(value = "addCourse", method = RequestMethod.POST)
+    public String addCourse(HttpServletRequest req) {
+        String msg = null;
+        try {
+            req.setCharacterEncoding("utf-8");
+
+            Course course = new Course();
+            course.setName(req.getParameter("name"));
+            course.setSelected(0);
+            course.setAmount(Integer.parseInt(req.getParameter("amount")));
+            course.setBelong(req.getParameter("belong"));
+            course.setCredit(Integer.parseInt(req.getParameter("credit")));
+            course.setPlace(req.getParameter("place"));
+            course.setDetail(req.getParameter("detail"));
+            course.setTime(req.getParameter("time"));
+            if (adminService.addCourse(course)) {
+                msg = "添加成功";
+            } else {
+                msg = "添加失败";
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            msg = "添加失败";
+        }finally {
+            req.getSession().setAttribute("msg", msg);
+            return "redirect:/courseManage";
+        }
+    }
+
+    @RequestMapping("adminDelCourse")
+    public String delCourse(@RequestParam String id, HttpServletRequest req) {
+        adminService.delCourse(Integer.parseInt(id));
+        req.getSession().setAttribute("msg", "删除成功");
+        return "redirect:/courseManage";
+    }
+
+    @RequestMapping(value = "/changeCourse", method = RequestMethod.GET)
+    public String changeCourse(@RequestParam String id, HttpServletRequest req) {
+        Course course = adminService.getCourseById(Integer.parseInt(id));
+        req.getSession().setAttribute("course", course);
+        return "changeClz";
+    }
+
+    @RequestMapping(value = "/changeCourse", method = RequestMethod.POST)
+    public String changeCourse(HttpServletRequest req) {
+        String msg = null;
+        try {
+            req.setCharacterEncoding("utf-8");
+
+
+            Integer id = (Integer) req.getSession().getAttribute("id");
+
+            Course course = adminService.getCourseById(id);
+
+            course.setName(req.getParameter("name"));
+            course.setAmount(Integer.parseInt(req.getParameter("amount")));
+            course.setBelong(req.getParameter("belong"));
+            course.setCredit(Integer.parseInt(req.getParameter("credit")));
+            course.setPlace(req.getParameter("place"));
+            course.setDetail(req.getParameter("detail"));
+            course.setTime(req.getParameter("time"));
+
+            if (adminService.updateCourse(course)) {
+                msg = "更新成功";
+            } else {
+                msg = "更新失败";
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            msg = "更新失败";
+            e.printStackTrace();
+        } finally {
+            req.getSession().setAttribute("msg", msg);
+            return "redirect:/courseManage";
+        }
+    }
+
+
+    @RequestMapping("/chooseManage")
+    public String chooseManage(HttpServletRequest req){
+        List<StudyInfo> records = adminService.getAllStudyInfo();
+        req.getSession().setAttribute("records", records);
+        return "allChoose";
+    }
+
+    @RequestMapping("/delStudyInfo")
+    public String delStudyInfo(HttpServletRequest req,@RequestParam String id){
+        String msg=null;
+        try{
+            adminService.delStudyInfo(Integer.parseInt(id));
+            msg = "删除成功";
+        }catch (Exception e){
+            msg="删除失败";
+            e.printStackTrace();
+        }finally {
+            req.getSession().setAttribute("msg",msg);
+            return "redirect:/chooseManage";
+        }
+    }
 
 }

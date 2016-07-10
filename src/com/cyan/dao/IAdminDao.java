@@ -3,6 +3,7 @@ package com.cyan.dao;
 import com.cyan.entity.Admin;
 import com.cyan.entity.Course;
 import com.cyan.entity.Student;
+import com.cyan.entity.StudyInfo;
 
 import java.util.List;
 
@@ -28,4 +29,13 @@ public interface IAdminDao {
 
     public void delStudent(String id);
 
+    public void addCourse(Course course);
+
+    public void delCourse(Integer id);
+
+    public List<StudyInfo> selectAllStudyInfo();
+
+    public void addStudyInfo(StudyInfo studyInfo);
+
+    public void delStudyInfo(Integer id);
 }

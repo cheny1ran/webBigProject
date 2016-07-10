@@ -4,6 +4,7 @@ import com.cyan.dao.IAdminDao;
 import com.cyan.entity.Admin;
 import com.cyan.entity.Course;
 import com.cyan.entity.Student;
+import com.cyan.entity.StudyInfo;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -65,5 +66,34 @@ public class AdminDao extends SqlSessionDaoSupport implements IAdminDao {
         map.put("id",id);
         this.getSqlSession().delete(SQL_NAMESPACE + ".delStudent", map);
 
+    }
+
+    @Override
+    public void addCourse(Course course) {
+        this.getSqlSession().insert(SQL_NAMESPACE+".insertClz",course);
+    }
+
+    @Override
+    public void delCourse(Integer id) {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("id", id);
+        this.getSqlSession().delete(SQL_NAMESPACE + ".delCourse", map);
+    }
+
+    @Override
+    public List<StudyInfo> selectAllStudyInfo() {
+        return this.getSqlSession().selectList(SQL_NAMESPACE+".selectAllStudyInfo");
+    }
+
+    @Override
+    public void addStudyInfo(StudyInfo studyInfo) {
+        this.getSqlSession().insert(SQL_NAMESPACE+".insertStudyInfo",studyInfo);
+    }
+
+    @Override
+    public void delStudyInfo(Integer id) {
+        Map<String,Integer> map=new HashMap<String, Integer>();
+        map.put("id", id);
+        this.getSqlSession().delete(SQL_NAMESPACE+".delStudyInfo",map);
     }
 }
