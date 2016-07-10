@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
+
+import com.alibaba.fastjson.JSON;
+
 
 /**
  * 功能描述:
@@ -96,6 +100,24 @@ public class DisplayController {
         List<Course> courses=adminService.getAllCourses();
         req.getSession().setAttribute("courses", courses);
         return "allCourses";
+    }
+
+    @RequestMapping("/adminIndex")
+    public String showChart(HttpServletRequest req){
+        List<Course> courses=adminService.getAllCourses();
+        List<String> listX=new ArrayList<String>();
+        List<Integer> listSelected=new ArrayList<Integer>();
+        List<Integer> listLeft=new ArrayList<Integer>();
+        for(Course course:courses){
+            listX.add(course.getName());
+            listSelected.add(course.getSelected());
+            listLeft.add(course.getAmount()-course.getSelected());
+        }
+
+        req.getSession().addAttribute("listX", JSON.toJSONString(listX));
+        req.getSession().addAttribute("listSelected",JSON.toJSONString(listSelected));
+        req.getSession().addAttribute("listLeft",JSON.toJSONString(listLeft));
+        return "admin";
     }
 
 }

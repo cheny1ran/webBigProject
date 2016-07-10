@@ -51,10 +51,72 @@
     </div>
 </nav>
 
+<div class="container">
+    <div id="chart" class="chart" style="width:100%;height:450px;"></div>
 
+</div>
 
+<script src="static/js/jquery-3.0.0.min.js"></script>
+<script src="static/js/echarts.min.js"></script>
+<script>
+    var myChart = echarts.init(document.getElementById('chart'));
 
+    var option = {
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        legend: {
+            data: ['已选人数', '可选人数']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis:  {
+            type: 'value'
+        },
+        yAxis: {
+            type: 'category',
+            data: <%=session.getAttribute("listX")%>
+        },
+        series: [
+            {
+                name: '已选人数',
+                type: 'bar',
+                stack: '总量',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'insideRight'
+                    }
+                },
+                data: <%=session.getAttribute("listSelected")%>
+            },
+            {
+                name: '可选人数',
+                type: 'bar',
+                stack: '总量',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'insideRight'
+                    }
+                },
+                data: <%=session.getAttribute("listLeft")%>
+            }
+        ]
+    };
 
+    myChart.setOption(option);
+    window.onresize = myChart.resize;
+    window.onload = myChart.resize;
+
+</script>
 
 </body>
 </html>
