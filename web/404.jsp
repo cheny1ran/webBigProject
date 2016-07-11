@@ -42,7 +42,7 @@
     </div>
 </nav>
 
-<div class="jumbotron masthead">
+<div class="jumbotron masthead" style="color: #f0efee" align="center">
     <h1>不存在的页面!</h1>
 </div>
 
