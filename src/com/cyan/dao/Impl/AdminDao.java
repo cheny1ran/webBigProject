@@ -43,16 +43,16 @@ public class AdminDao extends SqlSessionDaoSupport implements IAdminDao {
 
     @Override
     public void updateStudent(Student student) {
-        Map<String,Student> map=new HashMap<String, Student>();
-        map.put("s",student);
-        this.getSqlSession().update(SQL_NAMESPACE+".updateStudent",map);
+        Map<String, Student> map = new HashMap<String, Student>();
+        map.put("s", student);
+        this.getSqlSession().update(SQL_NAMESPACE + ".updateStudent", map);
     }
 
     @Override
     public Student selectStuById(String id) {
-        Map<String,String> map=new HashMap<String, String>();
-        map.put("id",id);
-        return this.getSqlSession().selectOne(SQL_NAMESPACE+".selectStuById",map);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("id", id);
+        return this.getSqlSession().selectOne(SQL_NAMESPACE + ".selectStuById", map);
     }
 
     @Override
@@ -62,15 +62,15 @@ public class AdminDao extends SqlSessionDaoSupport implements IAdminDao {
 
     @Override
     public void delStudent(String id) {
-        Map<String,String> map=new HashMap<String, String>();
-        map.put("id",id);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("id", id);
         this.getSqlSession().delete(SQL_NAMESPACE + ".delStudent", map);
 
     }
 
     @Override
     public void addCourse(Course course) {
-        this.getSqlSession().insert(SQL_NAMESPACE+".insertClz",course);
+        this.getSqlSession().insert(SQL_NAMESPACE + ".insertClz", course);
     }
 
     @Override
@@ -82,25 +82,39 @@ public class AdminDao extends SqlSessionDaoSupport implements IAdminDao {
 
     @Override
     public List<StudyInfo> selectAllStudyInfo() {
-        return this.getSqlSession().selectList(SQL_NAMESPACE+".selectAllStudyInfo");
+        return this.getSqlSession().selectList(SQL_NAMESPACE + ".selectAllStudyInfo");
     }
 
     @Override
     public void addStudyInfo(StudyInfo studyInfo) {
-        this.getSqlSession().insert(SQL_NAMESPACE+".insertStudyInfo",studyInfo);
+        this.getSqlSession().insert(SQL_NAMESPACE + ".insertStudyInfo", studyInfo);
     }
 
     @Override
     public void delStudyInfo(Integer id) {
-        Map<String,Integer> map=new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("id", id);
-        this.getSqlSession().delete(SQL_NAMESPACE+".delStudyInfo",map);
+        this.getSqlSession().delete(SQL_NAMESPACE + ".delStudyInfo", map);
     }
 
     @Override
     public StudyInfo selectById(Integer id) {
-        Map<String,Integer> map=new HashMap<String, Integer>();
-        map.put("id",id);
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("id", id);
         return this.getSqlSession().selectOne(SQL_NAMESPACE + ".selectByStudyId", map);
+    }
+
+    @Override
+    public void delStudyInfoByCId(Integer id) {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("id", id);
+        this.getSqlSession().delete(SQL_NAMESPACE + ".delStudyInfoByCId", map);
+    }
+
+    @Override
+    public void delStudyInfoBySId(String id) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("id", id);
+        this.getSqlSession().delete(SQL_NAMESPACE + "delStudyInfoBySId", map);
     }
 }

@@ -30,8 +30,10 @@ public class StudentService implements IStudentService {
     public Student login(String id, String pwd) {
 
         Student student = studentDao.selectById(id);
-        if (student.getPwd().equals(pwd)) {
-            return student;
+        if (student != null) {
+            if (student.getPwd().equals(pwd)) {
+                return student;
+            }
         }
         return null;
     }
@@ -59,7 +61,7 @@ public class StudentService implements IStudentService {
 
                 //查询是否已经选过
                 StudyInfo checkIfExist = studyInfoDao.check(stuId, clzId);
-                if(checkIfExist==null) {
+                if (checkIfExist == null) {
 
                     StudyInfo studyInfo = new StudyInfo();
                     studyInfo.setC_id(c.getId());
@@ -76,10 +78,10 @@ public class StudentService implements IStudentService {
                     clzDao.update(c);
 
                     return 0;
-                }else{
+                } else {
                     return 1;
                 }
-            }else{
+            } else {
                 return 2;
             }
         }
@@ -88,8 +90,8 @@ public class StudentService implements IStudentService {
 
     @Override
     public boolean changePwd(String stuId, String old, String newpwd) {
-        Student s = login(stuId,old);
-        if(s!=null){
+        Student s = login(stuId, old);
+        if (s != null) {
             s.setPwd(newpwd);
             studentDao.update(s);
             return true;

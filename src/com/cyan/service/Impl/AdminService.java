@@ -111,6 +111,7 @@ public class AdminService implements IAdminService {
     @Override
     public void delStudent(String id) {
         adminDao.delStudent(id);
+        adminDao.delStudyInfoBySId(id);
     }
 
     @Override
@@ -144,6 +145,7 @@ public class AdminService implements IAdminService {
     @Override
     public void delCourse(Integer id) {
         adminDao.delCourse(id);
+        adminDao.delStudyInfoByCId(id);
     }
 
     @Override

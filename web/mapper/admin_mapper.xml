@@ -116,4 +116,12 @@
         SELECT * FROM study WHERE id=${id};
     </select>
 
+    <delete id="delStudyInfoByCId" parameterType="java.util.Map">
+        DELETE FROM study WHERE c_id=${id}
+    </delete>
+
+    <delete id="delStudyInfoBySId" parameterType="java.util.Map">
+        DELETE FROM study WHERE s_id=${id}
+    </delete>
+
 </mapper>
