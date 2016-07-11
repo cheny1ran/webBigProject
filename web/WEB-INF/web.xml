@@ -32,4 +32,8 @@
     <welcome-file-list>
         <welcome-file>index</welcome-file>
     </welcome-file-list>
+    
+    <error-page>
+        <location>/404</location>
+    </error-page>
 </web-app>

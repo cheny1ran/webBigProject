@@ -21,9 +21,10 @@
 </head>
 <body>
 <%
-    if (session == null) {
+    if (session.getAttribute("id") == null) {
         request.getRequestDispatcher("adminLogin.jsp").forward(request, response);
     }
+
 %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -43,7 +44,7 @@
                 <li class="active"><a href="/adminIndex">主页</a></li>
                 <li><a href="/studentManage">学生管理</a></li>
                 <li><a href="/courseManage">课程管理</a></li>
-                <li><a href="/chooseManage">选课管理</a> </li>
+                <li><a href="/chooseManage">选课管理</a></li>
                 <li><a href="/index">返回学生版主页</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -51,7 +52,8 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container" style="margin-top: 150px">
+
     <div id="chart" class="chart" style="width:100%;height:450px;"></div>
 
 </div>
@@ -62,10 +64,13 @@
     var myChart = echarts.init(document.getElementById('chart'));
 
     var option = {
-        tooltip : {
+        title: {
+            text: '课程选课统计表'
+        },
+        tooltip: {
             trigger: 'axis',
-            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
             }
         },
         legend: {
@@ -77,7 +82,7 @@
             bottom: '3%',
             containLabel: true
         },
-        xAxis:  {
+        xAxis: {
             type: 'value'
         },
         yAxis: {

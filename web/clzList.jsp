@@ -44,7 +44,7 @@
                 <li><a href="/index">主页</a></li>
                 <li class="active"><a href="/showAllClasses">所有课程</a></li>
                 <li><a href="/showMyClasses">我的课程</a></li>
-                <li><a href="/adminLogin.jsp">社团登录</a></li>
+                <li><a href="/adminLogin.jsp">管理员登录</a></li>
             </ul>
             <%
                 if (name != null) {
@@ -53,7 +53,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a><%=name%> 欢迎您!
                 </a></li>
-                <li><a href="#" id="change">修改密码</a></li>
+                <li><a id="change" href="#" data-toggle="modal"
+                       data-target="#myModal">修改密码</a></li>
                 <li><a href="/logout">退出登录</a></li>
             </ul>
             <%
@@ -113,26 +114,49 @@
         %>
         </tbody>
     </table>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        修改密码
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/changePwd" method="post">
+                        <div class="form-group">
+                            <label for="old">旧密码</label>
+                            <input type="password" class="form-control" id="old" name="old" placeholder="旧密码" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newpwd">新密码</label>
+                            <input type="password" class="form-control" id="newpwd" name="newpwd" placeholder="新密码" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newagain">确认新密码</label>
+                            <input type="password" class="form-control" id="newagain" name="newagain" placeholder="再次输入新密码" required>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-success" value="提交">
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">关闭
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
 </div>
 </body>
 <script src="static/js/jquery-3.0.0.min.js"></script>
-<script src="static/js/layer.js"></script>
-<script>
-    $('#change').on('click', function () {
-        layer.open({
-            type: 1,
-            area: ['300px', '280px'],
-            shadeClose: false, //点击遮罩关闭
-            content: '<div class="container col-md-8">' +
-            '<form class="form-signin" action="/changePwd" method="post">' +
-            '<h2 class="form-signin-heading">修改密码</h2>' +
-            '<input type="password" name="old" class="form-control" placeholder="旧密码" required autofocus>' +
-            '<input type="password" name="newpwd" class="form-control" placeholder="新密码" required>' +
-            '<input type="password" name="newagain" class="form-control" placeholder="确认新密码" required>' +
-            '<button class="btn btn-lg btn-primary btn-block" type="submit">确认</button>' +
-            '</form>' +
-            '</div>'
-        });
-    });
-</script>
+<script type="text/javascript" src="static/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
 </html>

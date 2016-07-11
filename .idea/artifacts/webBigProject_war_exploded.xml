@@ -29,6 +29,7 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.6" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j:2.0.1" />
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.1.37" />
         </element>
       </element>
       <element id="directory" name="META-INF">

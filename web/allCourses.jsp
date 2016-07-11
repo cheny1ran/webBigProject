@@ -36,7 +36,7 @@
                 <li><a href="/adminIndex">主页</a></li>
                 <li><a href="/studentManage">学生管理</a></li>
                 <li class="active"><a href="/courseManage">课程管理</a></li>
-                <li><a href="/chooseManage">选课管理</a> </li>
+                <li><a href="/chooseManage">选课管理</a></li>
                 <li><a href="/index">返回学生版主页</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -54,9 +54,9 @@
         <li><a href="/adminIndex">首页</a></li>
         <li class="active">课程管理</li>
     </ol>
-        <%
+    <%
         if (msg != null) {
-            if (msg .equals("添加成功")||msg.equals("更新成功")||msg.equals("删除成功")) {
+            if (msg.equals("添加成功") || msg.equals("更新成功") || msg.equals("删除成功")) {
     %>
     <div class="alert alert-success" style="margin-top: 50px" role="alert">
         <%
@@ -130,7 +130,10 @@
             </tbody>
         </table>
     </div>
-    <script type="text/javascript" src="static/js/jquery-3.0.0.min.js"></script>
+
+</div>
+
+<script type="text/javascript" src="static/js/jquery-3.0.0.min.js"></script>
 
 </body>
 </html>

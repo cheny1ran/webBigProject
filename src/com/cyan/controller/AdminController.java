@@ -197,12 +197,45 @@ public class AdminController {
             Integer stdId = Integer.parseInt(id);
             StudyInfo info = adminService.getStudyById(stdId);
             Course c = adminService.getCourseById(info.getC_id());
-            c.setSelected(c.getSelected()-1);
+            c.setSelected(c.getSelected() - 1);
             adminService.updateCourse(c);
             adminService.delStudyInfo(stdId);
             msg = "删除成功";
         } catch (Exception e) {
             msg = "删除失败";
+            e.printStackTrace();
+        } finally {
+            req.getSession().setAttribute("msg", msg);
+            return "redirect:/chooseManage";
+        }
+    }
+
+
+    @RequestMapping("/addChoose")
+    public String addChoose(HttpServletRequest req, @RequestParam String stuId, @RequestParam String clzId) {
+        String msg = null;
+        try {
+            Integer cId = Integer.parseInt(clzId);
+            Student s = adminService.getStudentById(stuId);
+            Course c = adminService.getCourseById(cId);
+            if (s != null && c != null) {
+                if(c.getAmount()>c.getSelected()) {
+                    int rst = studentService.selectCource(stuId, cId);
+                    if (rst==0) {
+                        msg = "添加成功";
+                    } else if(rst==1){
+                        msg = "已经选过此课!";
+                    } else if(rst==2){
+                        msg="该课程已选满!";
+                    }else{
+                        msg="未知错误!";
+                    }
+                }
+            }else{
+                msg="添加失败";
+            }
+        } catch (Exception e) {
+            msg = "添加失败";
             e.printStackTrace();
         } finally {
             req.getSession().setAttribute("msg", msg);

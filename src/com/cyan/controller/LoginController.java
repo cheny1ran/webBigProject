@@ -60,10 +60,11 @@ public class LoginController {
     }
 
     @RequestMapping("/adminLogin")
-    public String adminLogin(@RequestParam String username,@RequestParam String pwd){
+    public String adminLogin(@RequestParam String username,@RequestParam String pwd,HttpServletRequest req){
         if (username.length() > 0 && username.length() < 20 && pwd.length() > 0 && pwd.length() < 20) {
             if(adminService.login(username, pwd)){
-                return "admin";
+                req.getSession().setAttribute("id",username);
+                return "redirect:adminIndex";
             }
         }
         return "adminLogin";

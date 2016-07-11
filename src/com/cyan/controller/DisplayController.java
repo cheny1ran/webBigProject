@@ -1,5 +1,6 @@
 package com.cyan.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.cyan.entity.Course;
 import com.cyan.entity.Student;
 import com.cyan.entity.StudyInfo;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.alibaba.fastjson.JSON;
 
 
 /**
@@ -90,6 +89,9 @@ public class DisplayController {
 
     @RequestMapping("/studentManage")
     public String studentManage(HttpServletRequest req){
+        if(req.getSession().getAttribute("id")==null){
+            return "adminLogin";
+        }
         List<Student> students=adminService.getAllStudents();
         req.getSession().setAttribute("students", students);
         return "allStudents";
@@ -97,6 +99,9 @@ public class DisplayController {
 
     @RequestMapping("/courseManage")
     public String courseManage(HttpServletRequest req){
+        if(req.getSession().getAttribute("id")==null){
+            return "adminLogin";
+        }
         List<Course> courses=adminService.getAllCourses();
         req.getSession().setAttribute("courses", courses);
         return "allCourses";
@@ -104,6 +109,9 @@ public class DisplayController {
 
     @RequestMapping("/adminIndex")
     public String showChart(HttpServletRequest req){
+        if(req.getSession().getAttribute("id")==null){
+            return "adminLogin";
+        }
         List<Course> courses=adminService.getAllCourses();
         List<String> listX=new ArrayList<String>();
         List<Integer> listSelected=new ArrayList<Integer>();
@@ -114,10 +122,15 @@ public class DisplayController {
             listLeft.add(course.getAmount()-course.getSelected());
         }
 
-        req.getSession().addAttribute("listX", JSON.toJSONString(listX));
-        req.getSession().addAttribute("listSelected",JSON.toJSONString(listSelected));
-        req.getSession().addAttribute("listLeft",JSON.toJSONString(listLeft));
+        req.getSession().setAttribute("listX", JSON.toJSONString(listX));
+        req.getSession().setAttribute("listSelected",JSON.toJSONString(listSelected));
+        req.getSession().setAttribute("listLeft",JSON.toJSONString(listLeft));
         return "admin";
+    }
+
+    @RequestMapping("/404")
+    public String pageNotFount(){
+        return "404";
     }
 
 }

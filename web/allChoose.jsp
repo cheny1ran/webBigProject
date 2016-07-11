@@ -123,32 +123,53 @@
             %>
             <tr>
                 <td colspan="9">&nbsp</td>
-                <td><a href="#" class="btn btn-success" id="add">添加选课记录</a></td>
+                <td>
+                    <button class="btn btn-success" data-toggle="modal"
+                            data-target="#myModal">添加选课记录
+                    </button>
+                </td>
             </tr>
 
             </tbody>
         </table>
     </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        添加选课记录
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/addChoose" method="post">
+                        <div class="form-group">
+                            <label for="stuId">学生学号</label>
+                            <input type="text" class="form-control" id="stuId" name="stuId" placeholder="学号" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clzId">课程编号</label>
+                            <input type="text" class="form-control" id="clzId" name="clzId" placeholder="课程编号" required>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-success" value="提交">
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">关闭
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 </div>
 <script type="text/javascript" src="static/js/jquery-3.0.0.min.js"></script>
-<script src="static/js/layer.js"></script>
-<script>
-    $('#add').on('click', function () {
-        layer.open({
-            type: 1,
-            area: ['300px', '280px'],
-            shadeClose: false, //点击遮罩关闭
-            content: '<div class="container col-md-8">' +
-            '<form class="form-signin" action="/changePwd" method="post">' +
-            '<h2 class="form-signin-heading">修改密码</h2>' +
-            '<input type="password" name="old" class="form-control" placeholder="旧密码" required autofocus>' +
-            '<input type="password" name="newpwd" class="form-control" placeholder="新密码" required>' +
-            '<input type="password" name="newagain" class="form-control" placeholder="确认新密码" required>' +
-            '<button class="btn btn-lg btn-primary btn-block" type="submit">确认</button>' +
-            '</form>' +
-            '</div>'
-        });
-    });
-</script>
+<script type="text/javascript" src="static/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 </body>
 </html>
